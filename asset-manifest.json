@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/athenahealth-task/static/css/main.c81c2c94.chunk.css",
+    "main.js": "/athenahealth-task/static/js/main.e3ff4d28.chunk.js",
+    "main.js.map": "/athenahealth-task/static/js/main.e3ff4d28.chunk.js.map",
+    "runtime-main.js": "/athenahealth-task/static/js/runtime-main.a00fa768.js",
+    "runtime-main.js.map": "/athenahealth-task/static/js/runtime-main.a00fa768.js.map",
+    "static/css/2.18802cc5.chunk.css": "/athenahealth-task/static/css/2.18802cc5.chunk.css",
+    "static/js/2.713e2370.chunk.js": "/athenahealth-task/static/js/2.713e2370.chunk.js",
+    "static/js/2.713e2370.chunk.js.map": "/athenahealth-task/static/js/2.713e2370.chunk.js.map",
+    "index.html": "/athenahealth-task/index.html",
+    "static/css/2.18802cc5.chunk.css.map": "/athenahealth-task/static/css/2.18802cc5.chunk.css.map",
+    "static/css/main.c81c2c94.chunk.css.map": "/athenahealth-task/static/css/main.c81c2c94.chunk.css.map",
+    "static/js/2.713e2370.chunk.js.LICENSE.txt": "/athenahealth-task/static/js/2.713e2370.chunk.js.LICENSE.txt",
+    "static/media/bootstrap-icons.css": "/athenahealth-task/static/media/bootstrap-icons.dfd0ea12.woff2",
+    "static/media/font-awesome.min.css": "/athenahealth-task/static/media/fontawesome-webfont.f691f37e.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a00fa768.js",
+    "static/css/2.18802cc5.chunk.css",
+    "static/js/2.713e2370.chunk.js",
+    "static/css/main.c81c2c94.chunk.css",
+    "static/js/main.e3ff4d28.chunk.js"
+  ]
+}
