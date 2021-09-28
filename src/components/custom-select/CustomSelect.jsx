@@ -1,15 +1,37 @@
 import React from 'react';
-import styles from './CustomSelect.module.scss';
 import Select from 'react-select';
 
 class CustomSelect extends React.Component {
    state = {
     options: this.props.options,
     value: this.props.value,
+    ownUpdate: false
   };
 
-  handleChange(selectedOption) {
-    this.setState({ value: selectedOption.target.value }, () => {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    let options = prevState.options;
+    let value = prevState.value;
+    if (prevState.ownUpdate) {
+        return {
+            options,
+            value,
+            ownUpdate: false
+        };
+    }
+    if (nextProps.options.length) {
+        options = nextProps.options;
+    }
+    if (nextProps.value) {
+        value = nextProps.value;
+    }
+    return {
+        options,
+        value
+    };
+  }
+
+  handleChange = (selectedOption) => {
+    this.setState({ value: selectedOption.value, ownUpdate: true }, () => {
       if (this.props && this.props.onChange) {
         this.props.onChange(selectedOption);
       }
@@ -63,9 +85,9 @@ class CustomSelect extends React.Component {
                 primary: '#124766',
               },
             })}
-            onChange={this.props.onChange}
+            onChange={this.handleChange}
             onMenuOpen={this.props.onOpen}
-            defaultValue={this.props.options.filter(
+            value={this.props.options.filter(
               ({ value }) => value === this.state.value
             )}
           />

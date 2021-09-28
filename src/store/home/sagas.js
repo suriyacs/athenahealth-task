@@ -1,45 +1,57 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { all, put, takeLatest, select } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
+import DATA from '../../constants/data';
+import _ from 'lodash';
 
-import { fetchSiteListFailure, fetchSiteListSuccess } from './actions';
-import { FETCH_SITE_LIST_REQUEST } from './actionTypes';
+import {
+  fetchDoseDetailFailure,
+  fetchDoseDetailSuccess,
+  updateDoseDetailSuccess,
+  updateDoseDetailFailure
+} from './actions';
+import { FETCH_DOSE_DETAIL_REQUEST, UPDATE_DOSE_DETAIL_REQUEST } from './actionTypes';
 // import { getSitesList } from './services';
-
 /*
-  Worker Saga: Fired on FETCH_SITE_LIST_REQUEST action
+  Worker Saga: Fired on FETCH_DOSE_DETAIL_REQUEST action
 */
 function* fetchSiteListSaga() {
   try {
-    const response = [
-        {
-            avatar: "https://reqres.in/img/faces/1-image.jpg",
-            email: "george.bluth@reqres.in",
-            first_name: "George",
-            id: 1,
-            last_name: "Bluth"
-        },
-        {
-            avatar: "https://reqres.in/img/faces/1-image.jpg",
-            email: "george.bluth@reqres.in",
-            first_name: "Button",
-            id: 1,
-            last_name: "Bluth"
-        },
-        {
-            avatar: "https://reqres.in/img/faces/1-image.jpg",
-            email: "george.bluth@reqres.in",
-            first_name: "Sam",
-            id: 1,
-            last_name: "Bluth"
-        }
-    ];
+    const state = yield select();
+    const { home: { countryDetail, countryList, statesList } } = state;
     yield put(
-      fetchSiteListSuccess({
-        siteList: response,
+      fetchDoseDetailSuccess({
+        countryDetail: _.keys(countryDetail).length ? countryDetail : DATA.countryDetailSource,
+        countryList: _.keys(countryList).length ? countryList : DATA.countryListSource,
+        statesList: _.keys(statesList).length ? statesList : DATA.statesListSource
       })
     );
   } catch (e) {
     yield put(
-      fetchSiteListFailure({
+      fetchDoseDetailFailure({
+        error: e.message,
+      })
+    );
+  }
+}
+
+function* updateDoseDetailSaga(action) {
+  try {
+    const state = yield select();
+    const { home: { countryDetail } } = state;
+    const { countryName, stateName, cityDetail} = action;
+    //updating the city dose detail
+    console.log("Payload to update == countryName: ", countryName, " stateName: ", stateName, " Updated Details: ", cityDetail);
+    countryDetail[countryName][stateName][cityDetail.displayName.toLowerCase()] = cityDetail;
+    toast.success('Updated Successfully!');
+    yield put(
+      updateDoseDetailSuccess({
+        countryDetail: countryDetail,
+      })
+    );
+  } catch(e) {
+    toast.success('Error while updating the information!');
+    yield put(
+      updateDoseDetailFailure({
         error: e.message,
       })
     );
@@ -51,7 +63,8 @@ function* fetchSiteListSaga() {
   Allows concurrent increments.
 */
 function* historySaga() {
-  yield all([takeLatest(FETCH_SITE_LIST_REQUEST, fetchSiteListSaga)]);
+  yield all([takeLatest(FETCH_DOSE_DETAIL_REQUEST, fetchSiteListSaga)]);
+  yield all([takeLatest(UPDATE_DOSE_DETAIL_REQUEST, updateDoseDetailSaga)])
 }
 
 export default historySaga;

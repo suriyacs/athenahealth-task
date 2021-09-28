@@ -3,13 +3,13 @@ import { createSelector } from 'reselect';
 
 const getPending = (state) => state.home.pending;
 
-const getSites = (state) => state.home.siteList;
+const getCountryDetail = (state) => state.home.countryDetail;
 
 const getError = (state) => state.home.error;
 
-export const getSitesSelector = createSelector(
-  getSites,
-  (siteList) => siteList
+export const getCountryDetailSelector = createSelector(
+  getCountryDetail,
+  (countryDetail) => countryDetail
 );
 
 export const getPendingSelector = createSelector(

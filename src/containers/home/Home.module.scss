@@ -1,5 +1,5 @@
 // The official css-module README recommends using the camelCase naming convention
-@import '../styles/variables';
+@import '../../styles/variables';
 
 .headColor {
   color: rgb(25, 0, 255);
@@ -8,12 +8,15 @@
 .homeSection {
   .parentRow {
     .buttonSection {
-      .viewHistory {
-        background-color: $white !important;
-        color: $primary;
-        border-color: $primary !important;
-        border-width: 3px;
-        border-radius: 10px;
+      .switchButton {
+        z-index: 0 !important;
+        .customInput:checked {
+          &:checked ~ .customLabel::before {
+            border-color: $primary !important;
+            background-color: $primary !important;
+          }
+        }
+        color: #000000;
       }
     }
     .searchSection {
@@ -24,20 +27,13 @@
         font-weight: bold;
       }
     }
-    .tableSection {
-      .header {
-        background-color: $table-header;
-      }
-    }
-    .switchButton {
-      z-index: 0 !important;
-      .customInput:checked {
-        &:checked ~ .customLabel::before {
-          border-color: $primary !important;
-          background-color: $primary !important;
+    .tableParent {
+      overflow: auto;
+      .tableSection {
+        .header {
+          background-color: $table-header;
         }
       }
-      color: #000000;
     }
   }
 }

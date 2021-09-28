@@ -14,3 +14,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.c-pointer {
+  cursor: pointer;
+}
+
+.active {
+  color: #6c757d !important;
+}
+
+.p-none {
+  pointer-events: none;
+}

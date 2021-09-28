@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './containers/Home';
+import Home from './containers/home/Home';
+import History from './containers/history/History';
 import Header from './components/header/Header';
 import Loader from './components/loader/Loader';
 
@@ -15,6 +16,9 @@ const App = () => {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route exact path="/history/:countryName/state/:stateName/city/:cityName">
+              <History />
             </Route>
           </Switch>
         </div>

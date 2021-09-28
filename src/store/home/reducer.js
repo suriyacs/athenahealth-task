@@ -1,41 +1,71 @@
 import {
-    FETCH_SITE_LIST_REQUEST,
-    FETCH_SITE_LIST_SUCCESS,
-    FETCH_SITE_LIST_FAILURE,
+    FETCH_DOSE_DETAIL_REQUEST,
+    FETCH_DOSE_DETAIL_SUCCESS,
+    FETCH_DOSE_DETAIL_FAILURE,
+    UPDATE_DOSE_DETAIL_REQUEST,
+    UPDATE_DOSE_DETAIL_SUCCESS,
+    UPDATE_DOSE_DETAIL_FAILURE
   } from './actionTypes';
   
   
   const initialState = {
     pending: false,
-    siteList: [],
+    countryDetail: {},
+    countryList: [],
+    statesList: {},
     error: null,
   };
   
-  export default (state = initialState, action) => {
+  const homeReducer = (state = initialState, action) => {
     switch (action.type) {
-      case FETCH_SITE_LIST_REQUEST:
+      case FETCH_DOSE_DETAIL_REQUEST:
         return {
           ...state,
           pending: true,
         };
-      case FETCH_SITE_LIST_SUCCESS:
+      case FETCH_DOSE_DETAIL_SUCCESS:
         return {
           ...state,
           pending: false,
-          siteList: action.payload.siteList,
+          countryDetail: action.payload.countryDetail,
+          countryList: action.payload.countryList,
+          statesList: action.payload.statesList,
           error: null,
         };
-      case FETCH_SITE_LIST_FAILURE:
+      case FETCH_DOSE_DETAIL_FAILURE:
         return {
           ...state,
           pending: false,
-          siteList: [],
+          countryDetail: {},
+          countryList: [],
+          statesList: {},
           error: action.payload.error,
         };
+      case UPDATE_DOSE_DETAIL_REQUEST:
+        return {
+          ...state,
+          pending: true,
+        };
+      case UPDATE_DOSE_DETAIL_SUCCESS:
+        return {
+          ...state,
+          pending: false,
+          countryDetail: action.payload.countryDetail,
+          error: null,
+        }
+      case UPDATE_DOSE_DETAIL_FAILURE:
+          return {
+            ...state,
+            pending: false,
+            countryDetail: {},
+            error: action.payload.error,
+          };
       default:
         return {
           ...state,
         };
     }
   };
+
+  export default homeReducer;
   
